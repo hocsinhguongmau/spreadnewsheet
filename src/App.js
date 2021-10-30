@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+
+import FunctionBar from './components/FunctionBar'
+import Sheet from './components/Sheet'
+
+const InputContext = React.createContext()
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <InputContext.Provider value=''>
+      <div>
+        <div className='title'>Spreadsheet</div>
+        <FunctionBar />
+        <Sheet numberOfRows={10} numberOfColumns={10} />
+      </div>
+    </InputContext.Provider>
+  )
 }
 
-export default App;
+export default App

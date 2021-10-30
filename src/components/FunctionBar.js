@@ -1,13 +1,11 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { FaCheck } from 'react-icons/fa'
 import { IoClose } from 'react-icons/io5'
 import { AiOutlineFunction } from 'react-icons/ai'
-import InputContext from '../App'
 
 export default function FunctionBar() {
-  const inputValue = useContext(InputContext)
   const [formActive, setFormActive] = useState(false)
-  const [value, setValue] = useState(inputValue)
+  const [value, setValue] = useState()
   const handleSubmit = (e) => {
     e.preventDefault()
     setValue('')

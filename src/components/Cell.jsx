@@ -7,7 +7,7 @@ const Cell = ({ isActive, currentIndex, getIndex }) => {
   //   console.log(inputs)
   // }, [])
   const [active, setActive] = useState(false)
-  const [value, setValue] = useState('a')
+  const [value, setValue] = useState('')
   const [index, setIndex] = useState('')
 
   const [currentStatus, setCurrentStatus] = useState(false)
@@ -39,7 +39,7 @@ const Cell = ({ isActive, currentIndex, getIndex }) => {
   }, [active])
 
   useEffect(() => {
-    console.log(index)
+    // console.log(index)
     index && getIndex(index)
   }, [index])
 

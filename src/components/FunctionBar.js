@@ -1,18 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useRecoilState } from 'recoil'
 import { FaCheck } from 'react-icons/fa'
 import { IoClose } from 'react-icons/io5'
 import { AiOutlineFunction } from 'react-icons/ai'
 
+import { activeIndex, inputValue } from '../atom/Cell'
+
 export default function FunctionBar() {
   const [formActive, setFormActive] = useState(false)
   const [value, setValue] = useState()
+  const [disabled, setDisabled] = useState(true)
+
+  const [currentActiveIndex, setCurrentActiveIndex] =
+    useRecoilState(activeIndex)
+
+  const [inputTerm, setInputTerm] = useRecoilState(inputValue)
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setValue('')
     setFormActive(false)
   }
   const handleChange = (e) => {
-    setValue(e.target.value)
+    setInputTerm({ id: currentActiveIndex, value: e.target.value })
+
     if (e.target.value.length > 0) {
       setFormActive(true)
     } else {
@@ -23,6 +34,12 @@ export default function FunctionBar() {
     setValue('')
     setFormActive(false)
   }
+
+  useEffect(() => {
+    setValue(inputTerm.value)
+    currentActiveIndex && setDisabled(false)
+  }, [inputTerm])
+
   return (
     <form onSubmit={handleSubmit} className='function-bar'>
       <span>
@@ -45,6 +62,7 @@ export default function FunctionBar() {
         value={value}
         onChange={handleChange}
         className='kaputt'
+        disabled={disabled}
       />
     </form>
   )

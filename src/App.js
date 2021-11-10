@@ -38,7 +38,6 @@ function App() {
             />
           </p>
           <p>
-            {' '}
             {errors.rows && (
               <span className='error'>This field is required</span>
             )}

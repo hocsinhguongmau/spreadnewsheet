@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { useRecoilState } from 'recoil'
 
-const Cell = ({ isActive, currentIndex, getIndex }) => {
-  // useEffect(() => {
-  //   const inputs = document.getElementById('11').childNodes[0].value
-  //   console.log(inputs)
-  // }, [])
+import { activeIndex, inputValue } from '../atom/Cell'
+
+const Cell = ({ isActive, currentIndex, cellInputValue }) => {
   const [active, setActive] = useState(false)
   const [value, setValue] = useState('')
   const [index, setIndex] = useState('')
 
+  const [currentActiveIndex, setCurrentActiveIndex] =
+    useRecoilState(activeIndex)
+
+  const [inputTerm, setInputTerm] = useRecoilState(inputValue)
+
   const [currentStatus, setCurrentStatus] = useState(false)
+
   const handleChange = (event) => {
     setValue(event.target.value)
+    let clonedInputTerm = { ...inputTerm }
+    clonedInputTerm.value = event.target.value
+    setInputTerm(clonedInputTerm)
   }
   const handleKeypress = async (event) => {
     if (event.which === 13) {
@@ -26,32 +34,45 @@ const Cell = ({ isActive, currentIndex, getIndex }) => {
       event.target.blur()
     }
   }
-
   const handleClick = () => {
     setActive(true)
     setIndex(currentIndex)
+    setCurrentActiveIndex(currentIndex)
+  }
+
+  const handleBlur = () => {
+    setActive(false)
   }
 
   useEffect(() => {
     if (active) {
     }
     isActive(active)
-  }, [active])
+  }, [active, isActive])
 
   useEffect(() => {
-    // console.log(index)
-    index && getIndex(index)
-  }, [index])
+    if (index) {
+      let inputData = { id: index, value: value }
+      setInputTerm(inputData)
+      setIndex('')
+    }
+  }, [index, value, inputTerm])
+
+  useEffect(() => {
+    if (cellInputValue) {
+      setValue(cellInputValue)
+    }
+  }, [cellInputValue])
 
   return !currentStatus && typeof value === 'string' ? (
     <input
       className={`input ${active ? 'active' : ''}`}
-      value={value}
+      value={cellInputValue ? cellInputValue : value}
       type='text'
       onKeyPress={handleKeypress}
       onChange={handleChange}
       onFocus={handleClick}
-      onBlur={() => setActive(false)}
+      onBlur={handleBlur}
     />
   ) : (
     <select>

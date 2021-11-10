@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
+
 import Cell from './Cell'
+import { activeIndex, inputValue } from '../atom/Cell'
 
 const Sheet = ({ numberOfRows, numberOfColumns }) => {
   const [indexActive, setIndexActive] = useState(false)
   const [currentIndex, setCurrentIndex] = useState('')
+
+  const [inputTerm, setInputTerm] = useRecoilState(inputValue)
 
   const alpha = Array.from(Array(26)).map((e, i) => i + 65)
   const alphabet = alpha.map((x) => String.fromCharCode(x))
@@ -24,7 +29,9 @@ const Sheet = ({ numberOfRows, numberOfColumns }) => {
             <Cell
               isActive={(active) => setIndexActive(active)}
               currentIndex={`${col + 1}${row}`}
-              getIndex={(index) => setCurrentIndex(index)}
+              cellInputValue={
+                inputTerm.id === `${col + 1}${row}` ? inputTerm.value : ''
+              }
             />
           </td>,
         )
@@ -34,37 +41,6 @@ const Sheet = ({ numberOfRows, numberOfColumns }) => {
     return tableBody
   }
 
-  console.log(currentIndex)
-
-  // console.log('currentIndex', currentIndex, 'indexActive', indexActive)
-
-  const tableBody2 = (numberOfRows, numberOfColumns) => {
-    return Array(numberOfRows)
-      .fill()
-      .map((row, i) => {
-        return (
-          <tr key={i}>
-            <td>{i + 1}</td>
-            {Array(numberOfColumns)
-              .fill()
-              .map((col, j) => {
-                return <td key={`${i}${j}`}>a</td>
-              })}
-          </tr>
-        )
-      })
-  }
-
-  // const newArr = tableBody2(numberOfRows, numberOfColumns)[0]
-  // const selectedIndex = newArr.props.children[1].filter((x) => x.key === '00')
-
-  // console.log(selectedIndex)
-  // useEffect(() => {
-  //   const input = document.querySelector('.active')
-  //   if (input) {
-  //     console.log(input.value)
-  //   }
-  // }, [tableBody])
   return (
     <table className='sheet' cellPadding={0} cellSpacing={0}>
       <thead>{tableHeader(alphabet)}</thead>

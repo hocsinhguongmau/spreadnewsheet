@@ -5,8 +5,8 @@ import FunctionBar from './components/FunctionBar'
 import Sheet from './components/Sheet'
 
 function App() {
-  const [numbers, setNumbers] = useState({ cols: 0, rows: 0 })
-  const [show, setShow] = useState(false)
+  const [numbers, setNumbers] = useState({ cols: 10, rows: 10 })
+  const [show, setShow] = useState(true)
   const {
     register,
     handleSubmit,
@@ -29,7 +29,7 @@ function App() {
         <form onSubmit={handleSubmit(onSubmit)} className='form'>
           <h2 className='form__title'>Enter the value for columns and rows</h2>
           <p>
-            <label for='rows'>Rows</label>{' '}
+            <label htmlFor='rows'>Rows</label>{' '}
             <input
               {...register('rows', { required: true })}
               type='number'
@@ -44,7 +44,7 @@ function App() {
             )}
           </p>
           <p>
-            <label for='cols'>Columns</label>
+            <label htmlFor='cols'>Columns</label>
             <input
               {...register('cols', { required: true })}
               type='number'

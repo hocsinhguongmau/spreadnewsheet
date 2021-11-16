@@ -206,3 +206,9 @@ body {
     color: #f00;
   }
 }
+
+.kaputt {
+  &:disabled {
+    background-color: #f00;
+  }
+}

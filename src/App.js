@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-
 import FunctionBar from './components/FunctionBar'
+
 import Sheet from './components/Sheet'
 
 function App() {
-  const [numbers, setNumbers] = useState({ cols: 1, rows: 1 })
-  const [show, setShow] = useState(false)
+  const [numbers, setNumbers] = useState({ cols: 10, rows: 10 })
+  const [show, setShow] = useState(true)
   const {
     register,
     handleSubmit,

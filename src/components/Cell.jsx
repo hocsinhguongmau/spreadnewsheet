@@ -28,27 +28,25 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
         const fetchData = await axios
           .get('https://jsonplaceholder.typicode.com/todos/1')
           .then((res) => res.data)
+        console.log(fetchData)
         setValue(fetchData)
         setCurrentStatus(true)
       }
       event.target.blur()
+      setActive(false)
     }
   }
   const handleClick = () => {
-    setActive(true)
     setIndex(currentIndex)
     setCurrentActiveIndex(currentIndex)
   }
 
-  const handleBlur = () => {
-    setActive(false)
-  }
-
   useEffect(() => {
-    if (active) {
+    setActive(false)
+    if (currentIndex === currentActiveIndex) {
+      setActive(true)
     }
-    isActive(active)
-  }, [active, isActive])
+  }, [currentActiveIndex])
 
   useEffect(() => {
     if (index) {
@@ -72,7 +70,6 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
       onKeyPress={handleKeypress}
       onChange={handleChange}
       onFocus={handleClick}
-      onBlur={handleBlur}
     />
   ) : (
     <select>

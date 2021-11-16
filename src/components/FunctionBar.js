@@ -23,7 +23,6 @@ export default function FunctionBar() {
   }
   const handleChange = (e) => {
     setInputTerm({ id: currentActiveIndex, value: e.target.value })
-
     if (e.target.value.length > 0) {
       setFormActive(true)
     } else {
@@ -38,7 +37,7 @@ export default function FunctionBar() {
   useEffect(() => {
     setValue(inputTerm.value)
     currentActiveIndex && setDisabled(false)
-  }, [inputTerm])
+  }, [inputTerm, currentActiveIndex])
 
   return (
     <form onSubmit={handleSubmit} className='function-bar'>

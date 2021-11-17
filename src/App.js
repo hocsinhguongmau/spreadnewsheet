@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import FunctionBar from './components/FunctionBar'
 
+import FunctionBar from './components/FunctionBar'
 import Sheet from './components/Sheet'
 
 function App() {

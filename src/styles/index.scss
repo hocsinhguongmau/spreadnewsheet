@@ -209,6 +209,7 @@ body {
 
 .kaputt {
   &:disabled {
-    background-color: #f00;
+    background-color: gray;
+    opacity: 0.3;
   }
 }

@@ -45,7 +45,6 @@ const Sheet = ({ numberOfRows, numberOfColumns }) => {
     <table className='sheet' cellPadding={0} cellSpacing={0}>
       <thead>{tableHeader(alphabet)}</thead>
       <tbody>{tableBody()}</tbody>
-      {/* <tbody>{tableBody2(numberOfRows, numberOfColumns)}</tbody> */}
       <tbody></tbody>
     </table>
   )

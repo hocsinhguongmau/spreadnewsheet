@@ -4,7 +4,7 @@ import { FaCheck } from 'react-icons/fa'
 import { IoClose } from 'react-icons/io5'
 import { AiOutlineFunction } from 'react-icons/ai'
 
-import { activeIndex, inputValue } from '../atom/Cell'
+import { activeIndex, inputValue, submitField } from '../atom/Cell'
 
 export default function FunctionBar() {
   const [formActive, setFormActive] = useState(false)
@@ -15,11 +15,11 @@ export default function FunctionBar() {
     useRecoilState(activeIndex)
 
   const [inputTerm, setInputTerm] = useRecoilState(inputValue)
+  const [submitForm, setSubmitForm] = useRecoilState(submitField)
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setValue('')
-    setFormActive(false)
+    setSubmitForm(true)
   }
   const handleChange = (e) => {
     setInputTerm({ id: currentActiveIndex, value: e.target.value })
@@ -42,7 +42,7 @@ export default function FunctionBar() {
   return (
     <form onSubmit={handleSubmit} className='function-bar'>
       <span>
-        <button
+        {/* <button
           onClick={handleReset}
           className={`btn-del ${formActive ? 'active' : ''}`}>
           <IoClose />
@@ -51,7 +51,7 @@ export default function FunctionBar() {
           type='submit'
           className={`btn-check ${formActive ? 'active' : ''}`}>
           <FaCheck />
-        </button>
+        </button> */}
         <i>
           <AiOutlineFunction />
         </i>

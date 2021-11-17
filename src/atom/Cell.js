@@ -12,3 +12,8 @@ export const inputValue = atom({
     value: '',
   },
 })
+
+export const submitField = atom({
+  key: 'submitField',
+  default: false,
+})

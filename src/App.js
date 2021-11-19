@@ -39,7 +39,7 @@ function App() {
           </p>
           <p>
             {errors.rows && (
-              <span className='error'>This field is required</span>
+              <span className='error'>Rows number is required</span>
             )}
           </p>
           <p>
@@ -53,7 +53,7 @@ function App() {
           </p>
           <p>
             {errors.cols && (
-              <span className='error'>This field is required</span>
+              <span className='error'>Columns number is required</span>
             )}
           </p>
           <button type='submit'>Add</button>

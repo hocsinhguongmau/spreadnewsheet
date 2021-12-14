@@ -13,10 +13,6 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
   const [getP, setGetP] = useState('?p')
   const [getO, setGetO] = useState('?o')
 
-  // const [url, setUrl] = useState(
-  // 'http://projectware.net:8890/sparql/?default-graph-uri=urn%3Asparql%3Abind%3Avamk-data&query=select+*+%7B%3Fs+%3Fp+%3Fo%7D&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on&run=+Run+Query+',
-  // )
-
   const [currentActiveIndex, setCurrentActiveIndex] =
     useRecoilState(activeIndex)
 
@@ -45,6 +41,7 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
   }
   let query = `%7B${getS}+${getP}+${getO}%7D`
   let baseUrl = `http://projectware.net:8890/sparql/?default-graph-uri=urn%3Asparql%3Abind%3Avamk-data&query=select+*+${query}&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on&run=+Run+Query+`
+
   useEffect(() => {
     query = `%7B${getS}+${getP}+${getO}%7D`
     baseUrl = `http://projectware.net:8890/sparql/?default-graph-uri=urn%3Asparql%3Abind%3Avamk-data&query=select+*+${query}&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on&run=+Run+Query+`
@@ -71,7 +68,7 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
 
         setGetO(`${operator[0].slice(3)}`)
       }
-      // S(s="15",p="10",o="")
+      // S(s="",p="",o="22")
       // S(s="mg@vamk.fi",p="",o="")
       // S(s="",p="10",o="")
 
@@ -130,34 +127,53 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
       ref={inputEl}
     />
   ) : (
-    <select ref={inputEl}>
-      {value &&
-        Object.values(value).map((item, index) => (
-          <optgroup
-            key={`${
-              item.s
-                ? item.s.value
-                : item.p
-                ? item.p.value
-                : item.o
-                ? item.o.value
-                : ''
-            }_${index}`}
-            label={`${
-              item.s
-                ? item.s.value
-                : item.p
-                ? item.p.value
-                : item.o
-                ? item.o.value
-                : ''
-            }`}>
-            {item.s && <option value={item.s.value}>{item.s.value}</option>}
-            {item.p && <option value={item.p.value}>{item.p.value}</option>}
-            {item.o && <option value={item.o.value}>{item.o.value}</option>}
-          </optgroup>
-        ))}
-    </select>
+    <ul class='dropdown' ref={inputEl}>
+      <li>
+        <a href='#'>Geton</a>
+        <ul>
+          {value &&
+            Object.values(value).map((item, index) => (
+              <li
+                key={`${
+                  item.s
+                    ? item.s.value
+                    : item.p
+                    ? item.p.value
+                    : item.o
+                    ? item.o.value
+                    : ''
+                }_${index}`}>
+                <a href='!#'>{`${
+                  item.s
+                    ? item.s.value
+                    : item.p
+                    ? item.p.value
+                    : item.o
+                    ? item.o.value
+                    : ''
+                }`}</a>
+                <ul>
+                  {item.s && (
+                    <li>
+                      <a href='!#'>{item.s.value}</a>
+                    </li>
+                  )}
+                  {item.p && (
+                    <li>
+                      <a href='!#'>{item.p.value}</a>
+                    </li>
+                  )}
+                  {item.o && (
+                    <li>
+                      <a href='!#'>{item.o.value}</a>
+                    </li>
+                  )}
+                </ul>
+              </li>
+            ))}
+        </ul>
+      </li>
+    </ul>
   )
 }
 

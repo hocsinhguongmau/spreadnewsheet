@@ -49,7 +49,6 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
 
   const submitFunction = async (text) => {
     if (/S.*/.test(text)) {
-      // console.log(/o="(?:[^"])\w+/.test(text))
       if (/s="(?:[^"])\w+/.test(text)) {
         console.log(text.match(/s="(?:[^"])\w+/))
         let subject = text.match(/s="(?:[^"])\w+/)
@@ -68,14 +67,6 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
 
         setGetO(`${operator[0].slice(3)}`)
       }
-      // S(s="",p="",o="22")
-      // S(s="mg@vamk.fi",p="",o="")
-      // S(s="",p="10",o="")
-
-      const text_dung =
-        'http://projectware.net:8890/sparql/?default-graph-uri=urn%3Asparql%3Abind%3Avamk-data&query=select+*+%7B%3C15%3E+%3Fp+%3Fo%7D%0D%0A&should-sponge=&format=text%2Fhtml&timeout=0&debug=on&run=+Run+Query+'
-      const text_xaolon =
-        'http://projectware.net:8890/sparql/?default-graph-uri=urn%3Asparql%3Abind%3Avamk-data&query=select+*+%7B15+?p+?o%7D&should-sponge=&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on&run=+Run+Query+'
 
       const fetchData = await axios.get(baseUrl).then((res) => {
         console.log(res.data.results.bindings)
@@ -127,10 +118,10 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
       ref={inputEl}
     />
   ) : (
-    <ul class='dropdown' ref={inputEl}>
+    <ul class='dropdown level-1' ref={inputEl}>
       <li>
         <a href='#'>Geton</a>
-        <ul>
+        <ul className='level-2'>
           {value &&
             Object.values(value).map((item, index) => (
               <li
@@ -152,7 +143,7 @@ const Cell = ({ isActive, currentIndex, cellInputValue }) => {
                     ? item.o.value
                     : ''
                 }`}</a>
-                <ul>
+                <ul className='level-3'>
                   {item.s && (
                     <li>
                       <a href='!#'>{item.s.value}</a>

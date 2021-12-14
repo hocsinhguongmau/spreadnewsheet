@@ -69,31 +69,5 @@ describe('Spreadsheet app', function () {
         )
       cy.get('.input').eq(1).should('have.value', 'Also works')
     })
-    it('Fetch data from json placeholder with function bar and cell input', function () {
-      cy.get('#01 .input')
-        .eq(0)
-        .type('=S{enter}')
-        .then(() => {
-          let result = Cypress.$('#01')
-          if (result.length) {
-            cy.get('#01 select')
-              .should('contain', '1')
-              .and('contain', 'delectus aut autem')
-              .and('contain', 'false')
-          }
-        })
-      cy.get('#11 .input').click()
-      cy.get('.kaputt')
-        .type('=S{enter}')
-        .then(() => {
-          let result = Cypress.$('#01')
-          if (result.length) {
-            cy.get('#11 select')
-              .should('contain', '1')
-              .and('contain', 'delectus aut autem')
-              .and('contain', 'false')
-          }
-        })
-    })
   })
 })

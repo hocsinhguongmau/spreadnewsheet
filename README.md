@@ -10,7 +10,10 @@ This project is completed.
 
 ## Project Screen Shot(s)
 
-[ PRETEND SCREEN SHOT IS HERE ]
+![image](https://user-images.githubusercontent.com/21122587/146065565-acf104b7-8660-453f-bf99-465a4ec45fd1.png)
+
+![image](https://user-images.githubusercontent.com/21122587/146065611-6e981360-17ec-4550-95d3-02934f57fbda.png)
+
 
 ## Installation and Setup Instructions
 
